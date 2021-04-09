@@ -1,13 +1,9 @@
 #pragma once
 
-#include <boost/filesystem/path.hpp>
-#include <boost/test/unit_test.hpp>
-#include <fstream>
 #include <string>
 #include <vector>
 
 #include "generated/v2/FileFormat_generated.h"
-#include "generated/v2/Metadata_generated.h"
 
 #include "v_array.h"
 #include "vw.h"

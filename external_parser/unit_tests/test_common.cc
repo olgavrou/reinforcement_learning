@@ -1,7 +1,15 @@
+#define BOOST_TEST_DYN_LINK
+
 #include "test_common.h"
 
 #include "io/io_adapter.h"
 #include "parser.h"
+#include "generated/v2/Metadata_generated.h"
+
+#include <boost/filesystem/path.hpp>
+#include <boost/test/unit_test.hpp>
+
+#include <fstream>
 
 namespace v2 = reinforcement_learning::messages::flatbuff::v2;
 

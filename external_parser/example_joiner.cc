@@ -60,7 +60,7 @@ float median(const joined_event &event) {
     values.push_back(o.value);
   }
 
-  int outcome_events_size = values.size();
+  auto outcome_events_size = values.size();
 
   sort(values.begin(), values.end());
   if (outcome_events_size % 2 == 0) {
@@ -239,8 +239,8 @@ int example_joiner::process_interaction(const v2::Event &event,
 
     DecisionServiceInteraction data;
     data.eventId = metadata.id()->str();
-    data.actions = {cb->action_ids()->data(),
-                    cb->action_ids()->data() + cb->action_ids()->size()};
+    data.actions = {reinterpret_cast<const unsigned*>(cb->action_ids()->data()),
+					reinterpret_cast<const unsigned*>(cb->action_ids()->data()) + cb->action_ids()->size()};
     data.probabilities = {cb->probabilities()->data(),
                           cb->probabilities()->data() +
                               cb->probabilities()->size()};
@@ -315,7 +315,7 @@ int example_joiner::process_dedup(const v2::Event &event,
 
   auto examples = v_init<example *>();
   // TODO check optional fields and act accordingly if missing
-  for (size_t i = 0; i < dedup->ids()->size(); i++) {
+  for (flatbuffers::uoffset_t i = 0; i < dedup->ids()->size(); i++) {
     auto dedup_id = dedup->ids()->Get(i);
     if (!_dedup_cache.exists(dedup_id)) {
 

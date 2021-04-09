@@ -1,0 +1,28 @@
+<Project>
+ <PropertyGroup>
+   <BUILD_EXTERNAL_PARSER>BUILD_EXTERNAL_PARSER</BUILD_EXTERNAL_PARSER>
+    <ExternalParserAdditionalIncludeDirs>;$(SolutionDir)\generated\v2;$(SolutionDir);$(SolutionDir)..\ext_libs\zstd\lib;</ExternalParserAdditionalIncludeDirs>
+ </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(SolutionDir)\external_parser.vcxproj">
+      <Project>{46e70957-3763-3076-b417-82df58025fcd}</Project>
+    </ProjectReference>
+ </ItemGroup>
+ <ItemGroup>
+    <ProjectReference Include="$(SolutionDir)..\ext_libs\libzstd.vcxproj">
+      <Project>{8bfd8150-94d5-4bf9-8a50-7bd9929a0850}</Project>
+    </ProjectReference>
+ </ItemGroup>
+ <ItemGroup>
+    <ClInclude Include="$(SolutionDir)\example_joiner.h" />
+    <ClInclude Include="$(SolutionDir)\lru_dedup_cache.h" />
+    <ClInclude Include="$(SolutionDir)\parse_example_binary.h" />
+    <ClInclude Include="$(SolutionDir)\parse_example_external.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)\example_joiner.cc" />
+    <ClCompile Include="$(SolutionDir)\lru_dedup_cache.cc" />
+    <ClCompile Include="$(SolutionDir)\parse_example_binary.cc" />
+    <ClCompile Include="$(SolutionDir)\parse_example_external.cc" />
+  </ItemGroup>
+</Project>

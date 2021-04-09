@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{46E70957-3763-3076-B417-82DF58025FCD}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
+    <flatcPath Condition="'$(flatcPath)'==''">flatc.exe</flatcPath>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <Import Project="$(VcpkgIntegration)" Condition="Exists('$(VcpkgIntegration)')" />
+  <PropertyGroup Condition="'$(VcpkgAutoLink)'!=''">
+    <VcpkgAutoLink>false</VcpkgAutoLink>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ext_libs\zstd\lib;$(SolutionDir)..\ext_libs\vowpal_wabbit\vowpalwabbit;%(AdditionalIncludeDirectories);$(VcpkgRoot)include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Message>Generating flatbuffers</Message>
+      <Command>$(flatcPath) -o "$(SolutionDir)\generated\v2" --cpp "$(SolutionDir)..\rlclientlib\schema\v2\Metadata.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\OutcomeEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\CbEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\CaEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\MultiSlotEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\Event.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\DedupInfo.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\LearningModeType.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\MultiStepEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\FileFormat.fbs"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ext_libs\zstd\lib;$(SolutionDir)..\ext_libs\vowpal_wabbit\vowpalwabbit;%(AdditionalIncludeDirectories);$(VcpkgRoot)include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Message>Generating flatbuffers</Message>
+      <Command>$(flatcPath) -o "$(SolutionDir)generated\v2" --cpp "$(SolutionDir)..\rlclientlib\schema\v2\Metadata.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\OutcomeEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\CbEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\CaEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\MultiSlotEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\Event.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\DedupInfo.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\LearningModeType.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\MultiStepEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\FileFormat.fbs"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ext_libs\zstd\lib;$(SolutionDir)..\ext_libs\vowpal_wabbit\vowpalwabbit;%(AdditionalIncludeDirectories);$(VcpkgRoot)include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PreBuildEvent>
+      <Message>Generating flatbuffers</Message>
+      <Command>$(flatcPath) -o "$(SolutionDir)generated\v2" --cpp "$(SolutionDir)..\rlclientlib\schema\v2\Metadata.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\OutcomeEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\CbEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\CaEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\MultiSlotEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\Event.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\DedupInfo.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\LearningModeType.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\MultiStepEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\FileFormat.fbs"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ext_libs\zstd\lib;$(SolutionDir)..\ext_libs\vowpal_wabbit\vowpalwabbit;%(AdditionalIncludeDirectories);$(VcpkgRoot)include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PreBuildEvent>
+      <Message>Generating flatbuffers</Message>
+      <Command>$(flatcPath) -o "$(SolutionDir)generated\v2" --cpp "$(SolutionDir)..\rlclientlib\schema\v2\Metadata.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\OutcomeEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\CbEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\CaEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\MultiSlotEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\Event.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\DedupInfo.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\LearningModeType.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\MultiStepEvent.fbs" "$(SolutionDir)..\rlclientlib\schema\v2\FileFormat.fbs"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="$(SolutionDir)..\rlclientlib\schema\v2\Metadata.fbs" />
+    <None Include="$(SolutionDir)..\rlclientlib\schema\v2\OutcomeEvent.fbs" />
+    <None Include="$(SolutionDir)..\rlclientlib\schema\v2\CbEvent.fbs" />
+    <None Include="$(SolutionDir)..\rlclientlib\schema\v2\CaEvent.fbs" />
+    <None Include="$(SolutionDir)..\rlclientlib\schema\v2\MultiSlotEvent.fbs" />
+    <None Include="$(SolutionDir)..\rlclientlib\schema\v2\Event.fbs" />
+    <None Include="$(SolutionDir)..\rlclientlib\schema\v2\LearningModeType.fbs" />
+    <None Include="$(SolutionDir)..\rlclientlib\schema\v2\MultiStepEvent.fbs" />
+    <None Include="$(SolutionDir)..\rlclientlib\schema\v2\FileFormat.fbs" />
+  </ItemGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)out\target\$(Configuration)\$(PlatformShortName)\</OutDir>
+    <IntDir>$(SolutionDir)out\int\$(Configuration)\$(PlatformShortName)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(SolutionDir)packages\boost.1.70.0.0\build\boost.targets" Condition="Exists('$(SolutionDir)packages\boost.1.70.0.0\build\boost.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)packages\boost.1.70.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)packages\boost.1.70.0.0\build\boost.targets'))" />
+  </Target>
+  <Target Name="AfterClean">
+    <RemoveDir Directories="$(SolutionDir)generated" />
+  </Target>
+</Project>
