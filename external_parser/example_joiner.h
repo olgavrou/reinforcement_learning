@@ -5,8 +5,8 @@
 #include "example.h"
 #include "generated/v2/CbEvent_generated.h"
 #include "generated/v2/FileFormat_generated.h"
-#include "lru_dedup_cache.h"
 #include "timestamp_helper.h"
+#include "dedup/dedup.h"
 #include "v_array.h"
 
 #include <fstream>
@@ -151,15 +151,7 @@ private:
   void invalidate_joined_event(const std::string &id);
   void clear_vw_examples(v_array<example *> &examples);
 
-  example *get_or_create_example();
-
-  static example &get_or_create_example_f(void *vw);
-
-  void return_example(example *ex);
-
-  static void return_example_f(void *vw, example *ex);
-
-  lru_dedup_cache _dedup_cache;
+  dedup _dedup;
   // from event id to all the information required to create a complete
   // (multi)example
   std::unordered_map<std::string, joined_event> _batch_grouped_examples;
@@ -167,8 +159,6 @@ private:
   std::unordered_map<std::string, std::vector<const v2::JoinedEvent *>>
       _batch_grouped_events;
   std::queue<std::string> _batch_event_order;
-
-  std::vector<example *> _example_pool;
 
   vw *_vw;
   flatbuffers::DetachedBuffer _detached_buffer;
